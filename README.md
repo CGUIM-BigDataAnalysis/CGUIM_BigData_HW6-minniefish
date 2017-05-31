@@ -22,12 +22,7 @@
 
 ``` r
 library(readxl)
-```
-
-    ## Warning: package 'readxl' was built under R version 3.3.3
-
-``` r
-test <- read_excel("C:/Users/宛俞/Desktop/9fb5c928-2bfb-4215-bc18-f63dc7c0b936.xls")
+test <- read_excel("~/Desktop/9fb5c928-2bfb-4215-bc18-f63dc7c0b93.xls")
 #幫欄位命名
 names(test) <- c("Class", "Scenic Spots", "Location","Jan","Feb", "Mar", "Apr", "May", "Jun" , "Jul", "Aug", "Sep", "Oct", "Nov", "Dec", "Total")
 #將第一欄刪除
@@ -61,17 +56,12 @@ test <- test[-c(346:353),]
 
 #讀入class欄位表
 library(readxl)
-class <- read_excel("C:/Users/宛俞/Desktop/class.xls")
+class <- read_excel("~/Desktop/class0.xls")
 #將第一列（不完整的類型欄位）取代
 test[,1] <- class$`類型 Class`
 
 #寬轉長
 library(reshape2)
-```
-
-    ## Warning: package 'reshape2' was built under R version 3.3.3
-
-``` r
 test.m <- melt(test, id.vars = c("Class", "Scenic Spots", "Location"), na.rm = TRUE)
 #欄位轉換成數值
 test.m$value <- as.numeric(test.m$value)
@@ -86,8 +76,6 @@ test.m$value <- as.numeric(test.m$value)
 library(dplyr)
 ```
 
-    ## Warning: package 'dplyr' was built under R version 3.3.3
-
     ## 
     ## Attaching package: 'dplyr'
 
@@ -101,11 +89,9 @@ library(dplyr)
 
 ``` r
 library(ggplot2)
-```
+library(stats)
+library(base)
 
-    ## Warning: package 'ggplot2' was built under R version 3.3.3
-
-``` r
 #比較2016年每一種類型的遊樂場所的總拜訪人數
 test.total <- subset(test.m, grepl("Total", test.m$variable))
 test.t <- test.total %>% group_by(Class, variable) %>%
